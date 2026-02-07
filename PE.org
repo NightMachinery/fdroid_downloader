@@ -1,0 +1,10 @@
+#+TITLE: fdroid_downloader/PE
+
+* _
+#+BEGIN_SRC markdown
+Create a Python app using uv that downloads the given apps to `-d, --dir=.`. If fdroid supports fuzzy searching, support that with `--search` (disabled by default, require exact match). Add tests with:
+- https://f-droid.org/en/packages/se.lublin.mumla/
+- https://f-droid.org/en/packages/chat.delta.lite/
+
+ask me any questions you have.
+#+END_SRC
