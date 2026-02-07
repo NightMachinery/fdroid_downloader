@@ -8,3 +8,43 @@ Create a Python app using uv that downloads the given apps to `-d, --dir=.`. If 
 
 ask me any questions you have.
 #+END_SRC
+
+* _
+#+BEGIN_SRC markdown
+Use proxy:
+```
+export ALL_PROXY=http://127.0.0.1:1087 all_proxy=http://127.0.0.1:1087 http_proxy=http://127.0.0.1:1087 https_proxy=http://127.0.0.1:1087 HTTP_PROXY=http://127.0.0.1:1087 HTTPS_PROXY=http://127.0.0.1:1087
+```
+---
+
+```
+uv tool install 'git+https://github.com/NightMachinery/fdroid_downloader.git'
+fdroid-downloader --help
+```
+
+Put the apps:
+
+- [Mumla \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/se.lublin.mumla/)
+- [ArcaneChat \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/chat.delta.lite/)
+- [Delta Chat \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/com.b44t.messenger/)
+- [SimpleX Chat | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/chat.simplex.app/)
+- [OpenVPN for Android \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/de.blinkt.openvpn/)
+- [Exclave \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/com.github.dyhkwong.sagernet/)
+- [strongSwan VPN Client \| F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/org.strongswan.android/)
+- [Conversations | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/eu.siacs.conversations/)
+- [Rethink: DNS + Firewall + VPN | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/com.celzero.bravedns/)
+- [Element Classic | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/im.vector.app/)
+- [Element X - Secure Chat & Call | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/io.element.android.x/)
+- [FluffyChat | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/chat.fluffy.fluffychat/)
+- [OsmAnd~ | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/net.osmand.plus/)
+- [Jitsi Meet | F-Droid - Free and Open Source Android App Repository](https://f-droid.org/en/packages/org.jitsi.meet/)
+
+in `~/Downloads/Android/`.
+
+Also these apps (not on fdroid, manually find their latest version):
+
+- <https://github.com/2dust/v2rayNG/releases>
+- <https://dot.karing.app/client.html?tag=android-stable>
+- [WireGuard for Android Downloads](https://download.wireguard.com/android-client/)
+- <https://psiphon.ca/PsiphonAndroid.apk>
+#+END_SRC

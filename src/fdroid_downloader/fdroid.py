@@ -26,9 +26,11 @@ class FdroidClient:
         *,
         base_url: str = "https://f-droid.org",
         session: requests.Session | None = None,
+        trust_env: bool = True,
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._session = session or requests.Session()
+        self._session.trust_env = trust_env
 
     def get_latest_apk_info(self, package: str, *, search: bool = False) -> PackageInfo:
         package_name = self._resolve_package(package, search=search)
