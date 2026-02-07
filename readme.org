@@ -11,12 +11,12 @@ uv tool install 'git+https://github.com/NightMachinery/fdroid_downloader.git'
 #+END_SRC
 
 * Usage
-#+begin_src bsh.dash :results verbatim :exports both :wrap results
+#+begin_src bsh.dash :results verbatim :exports both :wrap example
 fdroid-downloader --help
 #+end_src
 
 #+RESULTS:
-#+begin_results
+#+begin_example
 usage: fdroid-downloader [-h] [-d DIR] [--search | --no-search]
                          packages [packages ...]
 
@@ -30,5 +30,5 @@ options:
   -d DIR, --dir DIR     Output directory (default: .)
   --search, --no-search
                         Enable fuzzy searching in F-Droid.
-#+end_results
+#+end_example
 
