@@ -1,0 +1,3 @@
+#+TITLE: fdroid_downloader
+
+Downloads latest APKs for the given apps.
