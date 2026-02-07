@@ -7,10 +7,28 @@ Downloads latest APKs for the given apps.
 Install directly from GitHub with uv and expose the CLI:
 
 #+BEGIN_SRC shell
-<<<<<<< ours
 uv tool install 'git+https://github.com/NightMachinery/fdroid_downloader.git'
-=======
-uv tool install git+https://github.com/<ORG>/<REPO>.git
->>>>>>> theirs
-fdroid-downloader --help
 #+END_SRC
+
+* Usage
+#+begin_src bsh.dash :results verbatim :exports both :wrap results
+fdroid-downloader --help
+#+end_src
+
+#+RESULTS:
+#+begin_results
+usage: fdroid-downloader [-h] [-d DIR] [--search | --no-search]
+                         packages [packages ...]
+
+Download APKs from F-Droid.
+
+positional arguments:
+  packages              Package names or search queries to download.
+
+options:
+  -h, --help            show this help message and exit
+  -d DIR, --dir DIR     Output directory (default: .)
+  --search, --no-search
+                        Enable fuzzy searching in F-Droid.
+#+end_results
+
