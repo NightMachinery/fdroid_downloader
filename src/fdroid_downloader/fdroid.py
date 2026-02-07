@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import unescape
+from pathlib import Path
 import re
+import shutil
+import subprocess
 from typing import Iterable
 
 import requests
@@ -55,14 +58,65 @@ class FdroidClient:
     ) -> str:
         info = self.get_latest_apk_info(package, search=search)
         filename = info.download_url.rsplit("/", maxsplit=1)[-1]
-        destination = f"{dest_dir.rstrip('/')}/{filename}"
-        with self._session.get(info.download_url, stream=True, timeout=60) as response:
+        destination = Path(dest_dir) / filename
+        partial_destination = Path(f"{destination}.partial")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if self._is_aria2c_available():
+            self._download_with_aria2c(info.download_url, partial_destination)
+        else:
+            self._download_with_requests(info.download_url, partial_destination)
+        partial_destination.replace(destination)
+        return str(destination)
+
+    def _is_aria2c_available(self) -> bool:
+        return shutil.which("aria2c") is not None
+
+    def _download_with_aria2c(self, url: str, destination: Path) -> None:
+        command = [
+            "aria2c",
+            "--continue=true",
+            "--allow-overwrite=true",
+            "--file-allocation=none",
+            "--dir",
+            str(destination.parent),
+            "--out",
+            destination.name,
+            url,
+        ]
+        result = subprocess.run(
+            command,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(
+                "aria2c failed with exit code "
+                f"{result.returncode}: {result.stderr.strip()}"
+            )
+
+    def _download_with_requests(self, url: str, destination: Path) -> None:
+        resume_from = destination.stat().st_size if destination.exists() else 0
+        headers: dict[str, str] = {}
+        mode = "wb"
+        if resume_from:
+            headers["Range"] = f"bytes={resume_from}-"
+            mode = "ab"
+        with self._session.get(
+            url,
+            stream=True,
+            timeout=60,
+            headers=headers,
+        ) as response:
+            if response.status_code == 416 and resume_from:
+                return
             response.raise_for_status()
-            with open(destination, "wb") as file_handle:
+            if resume_from and response.status_code == 200:
+                mode = "wb"
+            with open(destination, mode) as file_handle:
                 for chunk in response.iter_content(chunk_size=1024 * 128):
                     if chunk:
                         file_handle.write(chunk)
-        return destination
 
     def _resolve_package(self, package: str, *, search: bool) -> str:
         if not search:
