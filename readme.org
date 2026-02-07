@@ -32,3 +32,6 @@ options:
                         Enable fuzzy searching in F-Droid.
 #+end_example
 
+#+begin_src zsh :eval never
+fdroid-downloader -d ~/Downloads/ se.lublin.mumla chat.delta.lite
+#+end_src
